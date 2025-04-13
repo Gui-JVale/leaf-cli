@@ -1,0 +1,33 @@
+{
+  "name": "leaf-cli",
+  "version": "0.0.1",
+  "description": "Leaf CLI and tools",
+  "main": "index.js",
+  "scripts": {
+    "bootstrap": "npm install && lerna bootstrap",
+    "publish": "lerna publish --exact"
+  },
+  "keywords": [
+    "Leaf",
+    "Shopify",
+    "DevTools"
+  ],
+  "author": "Leaf",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.0.2",
+    "eslint-plugin-prettier": "^5.2.3",
+    "globals": "^16.0.0",
+    "lerna": "^4.0.0",
+    "prettier": "^3.5.2",
+    "typescript-eslint": "^8.25.0"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "debug": "^4.3.2",
+    "lodash": "^4.17.21",
+    "minimist": "^1.2.5"
+  }
+}

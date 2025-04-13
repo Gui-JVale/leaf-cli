@@ -1,0 +1,38 @@
+{
+  "name": "leaf-cli",
+  "version": "0.0.1",
+  "description": "Leaf CLI",
+  "bin": {
+    "leaf": "lib/index.js"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "rimraf lib/",
+    "lint": "eslint --max-warnings 0 src/",
+    "lint-allow-warning": "eslint src/",
+    "build": "npm run clean && npx tsc --build --force",
+    "test": "npm run lint",
+    "prepublish": "npm test && npm run build"
+  },
+  "author": "Gui J Vale",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@types/find-root": "^1.1.4",
+    "@types/node": "^22.14.1",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.2",
+    "prettier": "^3.4.2",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.20.0"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^13.1.0",
+    "figures": "^3.2.0",
+    "find-root": "^1.1.0",
+    "mv": "^2.1.1",
+    "rimraf": "^6.0.1"
+  }
+}
