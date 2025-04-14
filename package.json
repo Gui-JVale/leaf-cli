@@ -12,7 +12,7 @@
     "Shopify",
     "DevTools"
   ],
-  "author": "Leaf",
+  "author": "Gui J Vale",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.21.0",

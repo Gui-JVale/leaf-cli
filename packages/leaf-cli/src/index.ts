@@ -30,7 +30,7 @@ readdirSync(leafToolsCommands)
   .forEach((file) => {
     const installCommmand: (program: Command) => void = require(
       join(leafToolsCommands, file),
-    ) as (program: Command) => void;
+    )?.default as (program: Command) => void;
 
     installCommmand(program);
   });
