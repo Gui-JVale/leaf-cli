@@ -91,7 +91,7 @@ export const messages = {
 
   configChange: () => {
     return (
-      "Changes to leaf.config.json Detected: You may need to quit <leaf watch>" +
+      "Changes to leaf.config.js Detected: You may need to quit <leaf watch>" +
       " and run a full <leaf deploy> as a result."
     );
   },
@@ -112,7 +112,7 @@ export const messages = {
     log(
       "File missing:",
       chalk.yellow(
-        "`leaf.config.json` does not exist. You need to add a config file before you can make changes to your Shopify store.",
+        "`leaf.config.js` does not exist. You need to add a config file before you can make changes to your Shopify store.",
       ),
     );
   },

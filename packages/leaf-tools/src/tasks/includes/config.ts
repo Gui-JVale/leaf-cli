@@ -40,7 +40,7 @@ export const config = {
 
   usesTailwind: fs.existsSync(join(themeRoot, tailwindConfig)),
 
-  leafConfig: "leaf.config.json",
+  leafConfig: "leaf.config.js",
 
   shopifyIgnore: join(themeRoot, ".shopifyignore"),
 

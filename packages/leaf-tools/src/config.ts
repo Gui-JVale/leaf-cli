@@ -17,7 +17,7 @@ export const config = {
   gulpFile: join(currentDirectory, "gulpfile.js"),
   gulp: existsSync(defaultGulpPath) ? defaultGulpPath : legacyGulpPath,
   themeRoot,
-  leafConfig: join(themeRoot, "leaf.config.json"),
+  leafConfig: join(themeRoot, "leaf.config.js"),
 };
 
 export default config;

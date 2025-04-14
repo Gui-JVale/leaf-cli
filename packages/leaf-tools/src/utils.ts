@@ -85,14 +85,14 @@ export const shopifyCLI = {
 };
 
 /**
- * Get leaf.config.json from project root dir
+ * Get leaf.config.js from project root dir
  */
 export function getLeafConfig(themeRoot: string) {
-  return require(join(themeRoot, "leaf.config.json"));
+  return require(join(themeRoot, "leaf.config.js"));
 }
 
 /**
- * Get store name from leaf.config.json
+ * Get store name from leaf.config.js
  */
 export function getStoreName(themeRoot: string, store: string) {
   return store
@@ -101,7 +101,7 @@ export function getStoreName(themeRoot: string, store: string) {
 }
 
 /**
- * Get theme ID from leaf.config.json
+ * Get theme ID from leaf.config.js
  */
 export function getThemeID(
   themeRoot: string,
@@ -156,7 +156,7 @@ export function login(store: string) {
 export function storeErrorMessage(store: string) {
   if (store) {
     console.log("");
-    console.log(red(`  The store ${store} does not exist in leaf.config.json`));
+    console.log(red(`  The store ${store} does not exist in leaf.config.js`));
     console.log(
       "    Check to see if you spelled the store correctly on leaf config and when running the command.",
     );
@@ -165,11 +165,11 @@ export function storeErrorMessage(store: string) {
     console.log("");
     console.log(
       red(
-        `  ${figures.cross} no store field in leaf.config.json. Did you forget the --store <store> argument?`,
+        `  ${figures.cross} no store field in leaf.config.js. Did you forget the --store <store> argument?`,
       ),
     );
     console.log(
-      "    If this is a multi-store project, please specify which store to watch, else add 'store: <store.myshopify.com>' to your project leaf.config.json",
+      "    If this is a multi-store project, please specify which store to watch, else add 'store: <store.myshopify.com>' to your project leaf.config.js",
     );
     console.log("");
   }

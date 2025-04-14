@@ -11,16 +11,16 @@ export default function (program: Command) {
     .command("deploy")
     .alias("d")
     .description(
-      "Runs a full deploy of your theme's code to a Shopify store specified in leaf.config.json. This runs shopify theme push with the --nodelete flag, so that files aren't deleted.",
+      "Runs a full deploy of your theme's code to a Shopify store specified in leaf.config.js. This runs shopify theme push with the --nodelete flag, so that files aren't deleted.",
     )
     .option(
       "-e, --env <environment>",
-      "Shopify theme to deploy code to (specified in leaf.config.json)",
+      "Shopify theme to deploy code to (specified in leaf.config.js)",
       "development",
     )
     .option(
       "-s, --store <store>",
-      "Shopify store(s) to deploy code to (specified in leaf.config.json)",
+      "Shopify store(s) to deploy code to (specified in leaf.config.js)",
     )
     .option(
       "-n, --no-dev",

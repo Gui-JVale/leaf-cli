@@ -14,12 +14,12 @@ export default function (program: Command) {
     )
     .option(
       "-e, --env <environment>[,<environment>...]",
-      "Shopify store(s) to deploy code to (specified in leaf.config.json)",
+      "Shopify store(s) to deploy code to (specified in leaf.config.js)",
       "development",
     )
     .option(
       "-s, --store <store>",
-      "Shopify store(s) to deploy code to (specified in leaf.config.json)",
+      "Shopify store(s) to deploy code to (specified in leaf.config.js)",
     )
     .option("-a, --all", "Pulls all files from specified theme", false)
     .option(
