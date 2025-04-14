@@ -31,7 +31,7 @@ export const config = {
     argv["store-password"] === "undefined" || !argv["store-password"]
       ? null
       : argv["store-password"],
-  optimize: !argv["skip-optimizations"],
+  optimize: !argv["dev"],
   nodelete: !argv["delete"],
   themeRoot,
   packageJson: pkg,
@@ -46,7 +46,7 @@ export const config = {
 
   src: {
     root: "src/",
-    js: "src/scripts/**/*.{js,js.liquid}",
+    js: "src/scripts/**/*.{js,ts,js.liquid}",
     vendorJs: "src/scripts/vendor/*.js",
     json: "src/**/*.json",
     css: "src/styles/**/*.css",
@@ -67,7 +67,7 @@ export const config = {
 
   tmp: {
     root: "tmp/",
-    js: "tmp/scripts/**/*.{js,js.liquid}",
+    js: "tmp/scripts/**/*.{js,ts,js.liquid}",
     vendorJs: "tmp/scripts/vendor/*.js",
     json: "tmp/**/*.json",
     css: "tmp/styles/**/*.css",

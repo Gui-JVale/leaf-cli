@@ -12,15 +12,16 @@ const cache = utilities.createEventCache();
  * building/cleaning/updating `dist` accordingly.  *Made up of individual tasks
  * referenced in other files
  */
-gulp.task("watch:src", () => {
-  return gulp.parallel(
+gulp.task(
+  "watch:src",
+  gulp.parallel(
     "watch:css",
     "watch:js",
     "watch:vendor-js",
     "watch:assets",
     "watch:svg",
-  )();
-});
+  ),
+);
 
 /**
  * Watches for changes in the `./dist` folder and passes event data to the
