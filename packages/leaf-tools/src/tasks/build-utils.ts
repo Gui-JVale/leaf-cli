@@ -72,6 +72,18 @@ gulp.task("sync-settings:tmp:src", () => {
 });
 
 /**
+ * Syncronizes the theme settings of /tmp directory into our src directory
+ */
+gulp.task("sync-settings:tmp:src", () => {
+  messages.logProcessFiles("Syncronizing /tmp theme settings with /src");
+  return copyFiles(
+    themeSettingsAssets,
+    { base: config.tmp.root },
+    config.src.root,
+  );
+});
+
+/**
  * Copies zip from dist to src
  */
 gulp.task("copy:zip", () => {

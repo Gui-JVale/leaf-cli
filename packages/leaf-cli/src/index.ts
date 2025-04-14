@@ -18,11 +18,9 @@ if (!themeRoot) {
   process.exit(1);
 }
 
-// fjkdjafkl;dasjsf
-
 const leafToolsCommands = join(
   themeRoot,
-  normalize("/node_modules/leaf-cli-tools/lib/commands"),
+  normalize("/node_modules/leaf-cli-shopify-tools/lib/commands"),
 );
 
 readdirSync(leafToolsCommands)

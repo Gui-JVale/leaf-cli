@@ -41,14 +41,6 @@ gulp.task(
 gulp.task("zip", gulp.series("build", "shopify:package:dist", "copy:zip"));
 
 /**
- * Synchronizes the development theme settings with our src folder theme settings
- */
-gulp.task(
-  "sync-settings",
-  gulp.series("generate:tmp", "shopify:pull:dev:tmp", "sync-settings:tmp:src"),
-);
-
-/**
  * Simple wrapper around src & dist watchers
  *
  * @summary Monitor your codebase for file changes and take the appropriate
@@ -87,10 +79,7 @@ gulp.task(
  * then proceeds to do a full (re)build and push files into specified theme
  * environment theme using shopify theme push, by default with the --no-delete flag
  */
-gulp.task(
-  "deploy",
-  gulp.series("sync-settings", "build", "shopify:push:dist", "clean"),
-);
+gulp.task("deploy", gulp.series("build", "shopify:push:dist", "clean"));
 
 /**
  * Does a full (re)build and push dist files into specified theme environment,
