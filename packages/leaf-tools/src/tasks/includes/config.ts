@@ -21,6 +21,8 @@ try {
   logger(err);
 }
 
+const leafConfig = require(join(themeRoot, "leaf.config.js"));
+
 export const config = {
   environment:
     argv.environment === "undefined" || !argv.environment
@@ -40,7 +42,7 @@ export const config = {
 
   usesTailwind: fs.existsSync(join(themeRoot, tailwindConfig)),
 
-  leafConfig: "leaf.config.js",
+  leafConfig,
 
   shopifyIgnore: join(themeRoot, ".shopifyignore"),
 
@@ -105,6 +107,10 @@ export const config = {
     vendorJs: "src/scripts/vendor.js",
     css: "src/styles/*.css",
     scss: "src/styles/*.scss",
+  },
+
+  js: {
+    inputs: leafConfig.build.js.inputs,
   },
 
   plugins: {
