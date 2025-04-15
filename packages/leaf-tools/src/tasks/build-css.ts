@@ -1,7 +1,7 @@
 import path from "path";
 import gulp from "gulp";
-import gulpSass from "gulp-sass";
-import sass from "sass";
+// import gulpSass from "gulp-sass";
+// import sass from "sass";
 import postcss from "gulp-postcss";
 import plumber from "gulp-plumber";
 import chokidar from "chokidar";
@@ -47,7 +47,7 @@ function processSass(): Promise<NodeJS.ReadWriteStream> {
     gulp
       .src(config.roots.scss, { allowEmpty: true })
       .pipe(plumber(utilities.errorHandler))
-      .pipe(gulpSass(sass)())
+      // .pipe(gulpSass(sass)())
       .pipe(postcss(config.plugins.postcss))
       .pipe(gulp.dest(config.dist.assets))
       .on("finish", resolve)

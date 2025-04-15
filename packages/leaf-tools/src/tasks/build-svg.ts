@@ -3,6 +3,7 @@ import vinylPaths from "vinyl-paths";
 import del from "del";
 import size from "gulp-size";
 import chokidar from "chokidar";
+// @ts-ignore
 import extReplace from "gulp-ext-replace";
 import plumber from "gulp-plumber";
 
@@ -16,7 +17,7 @@ import { messages } from "./includes/messages";
  */
 function processIcons(
   files: string | string[],
-): Promise<NodeJS.ReadWriteStream> {
+) {
   messages.logProcessFiles("build:svg");
   return gulp
     .src(files)
@@ -35,7 +36,7 @@ function processIcons(
  * Cleanup/remove liquid snippets from the `dist` directory during watch tasks if
  * any underlying SVG files in the `src` folder have been removed.
  */
-function removeIcons(files: string[]): Promise<NodeJS.ReadWriteStream> {
+function removeIcons(files: string[]) {
   messages.logProcessFiles("remove:svg");
   const mapFiles = files.map((file) => {
     const distFile = file.replace("src/icons", "dist/snippets");

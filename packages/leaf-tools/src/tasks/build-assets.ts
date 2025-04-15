@@ -24,10 +24,8 @@ const rootAssets = [config.shopifyIgnore];
 
 /**
  * Copies assets to the `/dist` directory
- *
- * @private
  */
-function processAssets(files: string[]): Promise<NodeJS.ReadWriteStream> {
+function processAssets(files: string[]) {
   messages.logProcessFiles("build:assets");
   return gulp
     .src(files, { base: config.src.root })
@@ -43,12 +41,8 @@ function processAssets(files: string[]): Promise<NodeJS.ReadWriteStream> {
 
 /**
  * Copies root assets to the `/dist` directory
- *
- * @param {Array} files
- * @returns {Stream}
- * @private
  */
-function processRootAssets(files: string[]): Promise<NodeJS.ReadWriteStream> {
+function processRootAssets(files: string[]) {
   messages.logProcessFiles("build:assets");
   return gulp
     .src(files, { allowEmpty: true })
@@ -64,12 +58,8 @@ function processRootAssets(files: string[]): Promise<NodeJS.ReadWriteStream> {
 
 /**
  * Deletes specified files
- *
- * @param {Array} files
- * @returns {Stream}
- * @private
  */
-function removeAssets(files: string[]): Promise<NodeJS.ReadWriteStream> {
+function removeAssets(files: string[]) {
   messages.logProcessFiles("remove:assets");
 
   const mapFiles = files.map((file) => {

@@ -36,7 +36,7 @@ function copyFiles(
   srcOptions: any,
   dest: string,
   log = false,
-): Promise<NodeJS.ReadWriteStream> {
+) {
   return gulp
     .src(files, srcOptions)
     .pipe(plumber(utilities.errorHandler))

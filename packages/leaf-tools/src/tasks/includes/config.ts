@@ -18,7 +18,7 @@ let pkg = {};
 try {
   pkg = require(join(themeRoot, "package.json"));
 } catch (err) {
-  logger(err);
+  logger(err as string);
 }
 
 const leafConfig = require(join(themeRoot, "leaf.config.js"));

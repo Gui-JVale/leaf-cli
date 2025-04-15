@@ -20,6 +20,7 @@ export const shopifyCLI = {
       shell: true,
     };
 
+    // @ts-ignore
     return spawn.sync("shopify", args, options);
   },
 
