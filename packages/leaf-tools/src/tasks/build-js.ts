@@ -7,14 +7,14 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import { config } from "./includes/config";
 import { messages } from "./includes/messages";
 
+const plugins = [nodeResolve()];
+
+if (config.optimize) {
+  plugins.push(terser());
+}
+
 function processThemeJs() {
   messages.logProcessFiles("build:js");
-
-  const plugins = [nodeResolve()];
-
-  if (config.optimize) {
-    plugins.push(terser());
-  }
 
   try {
     return rollup
@@ -38,7 +38,11 @@ gulp.task("build:js", () => {
 
 gulp.task("watch:js", () => {
   rollup
-    .watch({ input: config.js.inputs, output: { dir: "./dist/assets" } })
+    .watch({
+      input: config.js.inputs,
+      output: { dir: "./dist/assets" },
+      plugins,
+    })
     .on("change", (id, change) => {
       messages.logFileEvent(change.event, id);
     });
