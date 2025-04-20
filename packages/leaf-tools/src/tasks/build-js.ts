@@ -1,6 +1,8 @@
 import gulp from "gulp";
 import chokidar from "chokidar";
 import rollup from "rollup";
+import terser from "@rollup/plugin-terser";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 
 import { config } from "./includes/config";
 import { messages } from "./includes/messages";
@@ -8,10 +10,17 @@ import { messages } from "./includes/messages";
 function processThemeJs() {
   messages.logProcessFiles("build:js");
 
+  const plugins = [nodeResolve()];
+
+  if (config.optimize) {
+    plugins.push(terser());
+  }
+
   try {
     return rollup
       .rollup({
         input: config.js.inputs,
+        plugins,
       })
       .then((bundle) => {
         return bundle.write({
