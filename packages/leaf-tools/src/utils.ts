@@ -98,7 +98,7 @@ export function getLeafConfig(themeRoot: string) {
 export function getStoreName(themeRoot: string, store: string) {
   return store
     ? getLeafConfig(themeRoot).stores[store].domain
-    : getLeafConfig(themeRoot).store;
+    : getLeafConfig(themeRoot).store.domain;
 }
 
 /**
@@ -111,7 +111,7 @@ export function getThemeID(
 ) {
   return store
     ? getLeafConfig(themeRoot).stores[store].themes[environment]
-    : getLeafConfig(themeRoot).themes[environment];
+    : getLeafConfig(themeRoot).store.themes[environment];
 }
 
 /**

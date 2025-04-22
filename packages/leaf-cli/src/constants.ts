@@ -1,14 +1,17 @@
 // Template for single store config
 export const SINGLE_STORE_CONFIG = `module.exports = {
-  // Your Shopify store domain
-  store: "your-store.myshopify.com",
-  
-  // Theme IDs for different environments
-  themes: {
-    development: null, // Theme ID for development
-    production: null, // Theme ID for production
+  store: {
+    // Your Shopify store domain
+    domain: "your-store.myshopify.com",
+    storePassword: "password", // optional
+
+    // Theme IDs for different environments
+    themes: {
+      development: null, // Theme ID for development
+      production: null, // Theme ID for production
+    },
   },
-  
+
   // Build configuration
   build: {
     js: {
@@ -34,6 +37,7 @@ export const MULTI_STORE_CONFIG = `module.exports = {
   stores: {
     store1: {
       domain: "store1.myshopify.com",
+      storePassword: "password", // optional
       themes: {
         development: null,
         production: null

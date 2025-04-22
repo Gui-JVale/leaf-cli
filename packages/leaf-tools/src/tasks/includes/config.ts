@@ -22,17 +22,14 @@ try {
 }
 
 const leafConfig = require(join(themeRoot, "leaf.config.js"));
+const environment = getEnvironment();
+const currentStore = getStore();
+const storePassword = getStorePassword(currentStore);
 
 export const config = {
-  environment:
-    argv.environment === "undefined" || !argv.environment
-      ? "development"
-      : argv.environment,
-  store: argv.store === "undefined" || !argv.store ? null : argv.store,
-  storePassword:
-    argv["store-password"] === "undefined" || !argv["store-password"]
-      ? null
-      : argv["store-password"],
+  environment,
+  store: currentStore,
+  storePassword,
   optimize: !argv["dev"],
   nodelete: !argv["delete"],
   themeRoot,
@@ -144,3 +141,36 @@ if (config.optimize) {
 }
 
 config.plugins.postcss.push(reporter({ clearReportedMessages: true }));
+
+function getEnvironment() {
+  return argv.environment === "undefined" || !argv.environment
+    ? "development"
+    : argv.environment;
+}
+
+function getStorePassword(store: string | null) {
+  const passedInStorePassword =
+    argv["store-password"] === "undefined" || !argv["store-password"]
+      ? null
+      : argv["store-password"];
+
+  if (passedInStorePassword) {
+    return passedInStorePassword;
+  }
+
+  if (store) {
+    return leafConfig?.stores?.[store]?.storePassword || null;
+  }
+
+  if (leafConfig?.store?.storePassword) {
+    return leafConfig.store.storePassword;
+  }
+
+  return null;
+}
+
+function getStore() {
+  const currentStore =
+    argv.store === "undefined" || !argv.store ? null : argv.store;
+  return currentStore;
+}
