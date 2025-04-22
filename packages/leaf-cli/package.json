@@ -20,6 +20,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@types/find-root": "^1.1.4",
     "@types/node": "^22.14.1",
+    "@types/prompts": "^2.4.9",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.2",
@@ -33,6 +34,7 @@
     "figures": "^3.2.0",
     "find-root": "^1.1.0",
     "mv": "^2.1.1",
+    "prompts": "^2.4.2",
     "rimraf": "^6.0.1"
   },
   "gitHead": "84ba8e277ef0c2ae7a1d579ed796471b5518e5ed"

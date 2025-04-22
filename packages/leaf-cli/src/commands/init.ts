@@ -4,6 +4,7 @@ import { execSync } from "child_process";
 import { Command } from "commander";
 import chalk from "chalk";
 import figures from "figures";
+import prompts from "prompts";
 
 // Template for single store config
 const singleStoreTemplate = `module.exports = {
@@ -93,50 +94,94 @@ export default function (program: Command) {
       "Generate a config template for multiple stores",
       false,
     )
-    .action((options = {}) => {
+    .option("-y, --yes", "Skip all prompts and use default values", false)
+    .action(async (options = {}) => {
       const currentDir = process.cwd();
       const packageJsonPath = join(currentDir, "package.json");
       const configPath = join(currentDir, "leaf.config.js");
 
-      // Step 1: Check if package.json exists, if not create it
+      // If --yes flag is provided, skip all prompts
+      const skipPrompts = options.yes;
+
+      console.log(
+        chalk.blue(
+          `${figures.info} Initializing Leaf CLI project in ${currentDir}`,
+        ),
+      );
+
+      // Step 1: Check if package.json exists, if not ask to create it
       if (!existsSync(packageJsonPath)) {
-        console.log(
-          chalk.blue(`${figures.info} No package.json found. Creating one...`),
-        );
-        try {
-          writeFileSync(
-            packageJsonPath,
-            JSON.stringify(packageJsonTemplate, null, 2),
-            "utf8",
+        let createPackageJson = true;
+
+        if (!skipPrompts) {
+          const response = await prompts({
+            type: "confirm",
+            name: "create",
+            message: "No package.json found. Would you like to create one?",
+            initial: true,
+          });
+          createPackageJson = response.create;
+        }
+
+        if (createPackageJson) {
+          console.log(chalk.blue(`${figures.info} Creating package.json...`));
+          try {
+            writeFileSync(
+              packageJsonPath,
+              JSON.stringify(packageJsonTemplate, null, 2),
+              "utf8",
+            );
+            console.log(chalk.green(`${figures.tick} Created package.json`));
+          } catch (error) {
+            console.error(
+              chalk.red(`${figures.cross} Error creating package.json:`),
+            );
+            console.error(error);
+            return;
+          }
+        } else {
+          console.log(
+            chalk.yellow(`${figures.warning} Skipping package.json creation`),
           );
-          console.log(chalk.green(`${figures.tick} Created package.json`));
-        } catch (error) {
-          console.error(
-            chalk.red(`${figures.cross} Error creating package.json:`),
-          );
-          console.error(error);
-          return;
         }
       } else {
         console.log(chalk.blue(`${figures.info} package.json already exists`));
       }
 
-      // Step 2: Check if leaf.config.js exists, if not create it
+      // Step 2: Check if leaf.config.js exists, if not ask to create it
       if (!existsSync(configPath)) {
-        console.log(chalk.blue(`${figures.info} Creating leaf.config.js...`));
-        try {
-          // Choose template based on option
-          const template = options.multistore
-            ? multiStoreTemplate
-            : singleStoreTemplate;
-          writeFileSync(configPath, template, "utf8");
-          console.log(chalk.green(`${figures.tick} Created leaf.config.js`));
-        } catch (error) {
-          console.error(
-            chalk.red(`${figures.cross} Error creating leaf.config.js:`),
+        let createConfig = true;
+
+        if (!skipPrompts) {
+          const response = await prompts({
+            type: "confirm",
+            name: "create",
+            message: "Would you like to create a leaf.config.js file?",
+            initial: true,
+          });
+          createConfig = response.create;
+        }
+
+        if (createConfig) {
+          console.log(chalk.blue(`${figures.info} Creating leaf.config.js...`));
+          try {
+            // Choose template based on option
+            const template = options.multistore
+              ? multiStoreTemplate
+              : singleStoreTemplate;
+            writeFileSync(configPath, template, "utf8");
+            console.log(chalk.green(`${figures.tick} Created leaf.config.js`));
+          } catch (error) {
+            console.error(
+              chalk.red(`${figures.cross} Error creating leaf.config.js:`),
+            );
+            console.error(error);
+            return;
+          }
+        } else {
+          console.log(
+            chalk.yellow(`${figures.warning} Skipping leaf.config.js creation`),
           );
-          console.error(error);
-          return;
         }
       } else {
         console.log(
@@ -144,32 +189,50 @@ export default function (program: Command) {
         );
       }
 
-      // Step 3: Install leaf-tools if not installed
-      console.log(
-        chalk.blue(`${figures.info} Installing leaf-cli-shopify-tools...`),
-      );
-      try {
-        execSync("npm install leaf-cli-shopify-tools --save", {
-          stdio: "inherit",
-          cwd: currentDir,
+      // Step 3: Ask to install leaf-tools
+      let installTools = true;
+
+      if (!skipPrompts) {
+        const response = await prompts({
+          type: "confirm",
+          name: "install",
+          message: "Would you like to install leaf-cli-shopify-tools?",
+          initial: true,
         });
+        installTools = response.install;
+      }
+
+      if (installTools) {
         console.log(
-          chalk.green(
-            `${figures.tick} Installed leaf-cli-shopify-tools successfully`,
+          chalk.blue(`${figures.info} Installing leaf-cli-shopify-tools...`),
+        );
+        try {
+          execSync("npm install leaf-cli-shopify-tools --save", {
+            stdio: "inherit",
+            cwd: currentDir,
+          });
+          console.log(
+            chalk.green(
+              `${figures.tick} Installed leaf-cli-shopify-tools successfully`,
+            ),
+          );
+        } catch (error) {
+          console.error(
+            chalk.red(`${figures.cross} Error installing dependencies:`),
+          );
+          console.error(error);
+          return;
+        }
+      } else {
+        console.log(
+          chalk.yellow(
+            `${figures.warning} Skipping installation of leaf-cli-shopify-tools`,
           ),
         );
-      } catch (error) {
-        console.error(
-          chalk.red(`${figures.cross} Error installing dependencies:`),
-        );
-        console.error(error);
-        return;
       }
 
       console.log("");
-      console.log(
-        chalk.green(`${figures.tick} Project initialized successfully!`),
-      );
+      console.log(chalk.green(`${figures.tick} Project setup completed!`));
       console.log(chalk.blue(`${figures.info} Next steps:`));
       console.log(
         chalk.blue("  1. Update your leaf.config.js with your store details"),

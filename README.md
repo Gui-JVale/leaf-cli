@@ -4,8 +4,10 @@ A CLI tool and utilities for Shopify theme development.
 
 ## Installation
 
+Install the CLI globally
+
 ```bash
-npm install leaf-cli-shopify
+npm install -g leaf-cli-shopify
 ```
 
 ## Getting Started
@@ -16,20 +18,26 @@ The easiest way to start a new Shopify theme project with Leaf CLI is to use the
 # Go into a shopify theme directory
 cd my-shopify-theme
 
-# Initialize the project
+# Initialize the project interactively
 leaf init
 ```
 
-This will:
+The init command will guide you through the setup process with prompts:
 
-1. Create a package.json if one doesn't exist
-2. Install leaf-cli-shopify-tools
-3. Create a leaf.config.js file with default settings
+1. Create a package.json if one doesn't exist (you'll be asked for confirmation)
+2. Create a leaf.config.js file (you'll be asked for confirmation)
+3. Install leaf-cli-shopify-tools (you'll be asked for confirmation)
 
 For multiple store configuration, use:
 
 ```bash
 leaf init --multistore
+```
+
+To skip all prompts and automatically apply all actions:
+
+```bash
+leaf init --yes
 ```
 
 ## Configuration
@@ -123,12 +131,13 @@ leaf init [options]
 Options:
 
 - `-m, --multistore`: Generate a configuration template for multiple stores.
+- `-y, --yes`: Skip all prompts and automatically apply all actions.
 
-The init command will:
+The init command will ask for confirmation before:
 
-- Create a package.json if one doesn't exist
-- Create a leaf.config.js file with default settings
-- Install the leaf-cli-shopify-tools package
+- Creating a package.json file
+- Creating a leaf.config.js file
+- Installing the leaf-cli-shopify-tools package
 
 ### Build
 
