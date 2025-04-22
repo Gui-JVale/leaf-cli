@@ -100,13 +100,16 @@ Example entry point configuration in `leaf.config.js`:
 
 ```javascript
 module.exports = {
-  // Your Shopify store domain
-  store: "your-store.myshopify.com",
+  store: {
+    // Your Shopify store domain
+    domain: "your-store.myshopify.com",
+    storePassword: "password", // optional, for password-protected stores
 
-  // Theme IDs for different environments
-  themes: {
-    development: 123456789, // Theme ID for development
-    production: 987654321, // Theme ID for production
+    // Theme IDs for different environments
+    themes: {
+      development: 123456789, // Theme ID for development
+      production: 987654321, // Theme ID for production
+    },
   },
 
   // Build configuration
@@ -143,13 +146,16 @@ Setup the `leaf.config.js` file in the root of your Shopify theme project. This 
 
 ```javascript
 module.exports = {
-  // Your Shopify store domain
-  store: "your-store.myshopify.com",
+  store: {
+    // Your Shopify store domain
+    domain: "your-store.myshopify.com",
+    storePassword: "password", // optional, for password-protected stores
 
-  // Theme IDs for different environments
-  themes: {
-    development: 123456789, // Theme ID for development
-    production: 987654321, // Theme ID for production
+    // Theme IDs for different environments
+    themes: {
+      development: 123456789, // Theme ID for development
+      production: 987654321, // Theme ID for production
+    },
   },
 
   // Build configuration
@@ -181,6 +187,7 @@ module.exports = {
   stores: {
     store1: {
       domain: "store1.myshopify.com",
+      storePassword: "password", // optional, for password-protected stores
       themes: {
         development: 111111111,
         production: 222222222,
