@@ -2,6 +2,8 @@ import fs from "fs";
 import { join } from "path";
 import logger from "debug";
 import findRoot from "find-root";
+// @ts-ignore
+import tailwindcssNesting from "@tailwindcss/nesting";
 import tailwindcss from "tailwindcss";
 import cssnano from "cssnano";
 import pxtorem from "postcss-pxtorem";
@@ -117,6 +119,7 @@ export const config = {
 };
 
 if (config.usesTailwind) {
+  config.plugins.postcss.push(tailwindcssNesting);
   config.plugins.postcss.push(
     tailwindcss({ config: join(themeRoot, tailwindConfig) }),
   );
