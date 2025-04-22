@@ -40,6 +40,101 @@ To skip all prompts and automatically apply all actions:
 leaf init --yes
 ```
 
+## Theme Structure
+
+Leaf expects a specific directory structure for your Shopify theme project. It follows the native Shopify theme structure with some additional directories for better organization of assets:
+
+### Source Structure
+
+```
+my-shopify-theme/
+├── src/
+│   ├── assets/           # Theme assets (images, fonts, etc.)
+│   ├── config/           # Theme settings schema
+│   ├── layout/           # Theme layout files
+│   ├── locales/          # Translation files
+│   ├── sections/         # Theme sections
+│   ├── snippets/         # Theme snippets
+│   ├── templates/        # Theme templates
+│   ├── scripts/          # JavaScript files
+│   │   ├── theme.js      # Main entry point (defined in leaf.config.js)
+│   │   ├── .../          # You can setup folder structure as you like
+│   │   └── whatever/     # Example
+│   ├── styles/           # CSS/SCSS files
+│   │   ├── theme.scss    # Main stylesheet
+│   │   ├── .../          # Setup folder structure as you like
+│   │   └── example/      # Example
+│   └── icons/            # SVG icons
+├── dist/                 # Built theme files (generated)
+├── leaf.config.js        # Leaf configuration
+└── package.json          # Project dependencies
+```
+
+### Distribution Structure
+
+After running the build command, Leaf generates a `dist` folder structured like a standard Shopify theme:
+
+```
+my-shopify-theme/
+├── dist/
+│   ├── assets/           # All processed assets (JS, CSS, images, fonts)
+│   ├── config/           # Theme settings schema (copied from src)
+│   ├── layout/           # Theme layout files (copied from src)
+│   ├── locales/          # Translation files (copied from src)
+│   ├── sections/         # Theme sections (copied from src)
+│   ├── snippets/         # Theme snippets (copied from src + processed icons)
+│   └── templates/        # Theme templates (copied from src)
+```
+
+### Special Directories
+
+#### Scripts Directory
+
+All JavaScript logic lives in the `src/scripts` directory:
+
+- Entry points are defined in the `leaf.config.js` file
+- These entry points will be processed by Rollup and placed in the `dist/assets` folder
+- You can use ES modules (import/export) and the code will be bundled correctly
+
+Example entry point configuration in `leaf.config.js`:
+
+```javascript
+module.exports = {
+  // Your Shopify store domain
+  store: "your-store.myshopify.com",
+
+  // Theme IDs for different environments
+  themes: {
+    development: 123456789, // Theme ID for development
+    production: 987654321, // Theme ID for production
+  },
+
+  // Build configuration
+  build: {
+    js: {
+      inputs: ["src/scripts/theme.js", "src/scripts/checkout.js"],
+    },
+  },
+};
+```
+
+#### Styles Directory
+
+CSS and SCSS files live in the `src/styles` directory:
+
+- Leaf supports Tailwind CSS out of the box
+- You can use CSS imports (`@import "file.css"`)
+- Tailwind directives are fully supported
+- Processed CSS files will be placed in the `dist/assets` folder
+
+#### Icons Directory
+
+SVG icons live in the `src/icons` directory:
+
+- Each SVG file will be transformed into a Liquid snippet
+- For example, `src/icons/icon-example.svg` becomes `dist/snippets/icon-example.liquid`
+- This makes it easy to include icons in your theme using Liquid includes: `{% include 'icon-example' %}`
+
 ## Configuration
 
 Setup the `leaf.config.js` file in the root of your Shopify theme project. This file is required for the CLI to work properly and contains information about your Shopify store and themes.
