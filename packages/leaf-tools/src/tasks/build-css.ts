@@ -6,7 +6,7 @@ import gulp from "gulp";
 import postcss from "gulp-postcss";
 import plumber from "gulp-plumber";
 import chokidar from "chokidar";
-import glob from "glob";
+import { glob } from "glob";
 
 import { config } from "./includes/config";
 import { messages } from "./includes/messages";
