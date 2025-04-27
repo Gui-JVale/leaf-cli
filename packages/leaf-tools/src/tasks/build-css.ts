@@ -95,16 +95,15 @@ gulp.task("watch:css", () => {
         // Process the appropriate files
         if (isCssFile) {
           await processSass();
+          messages.logFileEvent(event, path);
         }
+
         await processCss();
 
         // Important: Touch CSS files after processing to ensure Shopify detects changes
         setTimeout(() => {
           touchCssFiles();
         }, 500);
-
-        // Log the event
-        messages.logFileEvent(event, path);
       } catch (error) {
         console.error(`Error processing CSS:`, error);
       }
