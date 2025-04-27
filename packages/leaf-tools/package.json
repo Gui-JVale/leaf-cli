@@ -1,6 +1,6 @@
 {
   "name": "leaf-cli-shopify-tools",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Leaf CLI Shopify Tools",
   "main": "index.js",
   "scripts": {
