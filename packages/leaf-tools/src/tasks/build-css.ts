@@ -86,7 +86,6 @@ gulp.task("build:css", () => {
  * Watches css in the `/src` directory
  */
 gulp.task("watch:css", () => {
-  console.log("Watching CSS files");
   chokidar
     .watch(assets, { ignoreInitial: true })
     .on("all", async (event, path) => {
